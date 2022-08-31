@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">{{title}}</a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item text-white">
+          <a aria-current="page" class="nav-link text-white" href="#">Inicio</a>
+        </li>
+        <!--
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/directivas">Directivas</a>
+        </li>
+        -->
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link text-white" routerLink="/clientes">Clientes</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li *ngIf="!authService.estaLogeado()"><a [routerLink]="['/login']" class="btn btn-outline-primary">Log In</a>
+        </li>
+
+        <li *ngIf="authService.estaLogeado()" class="dropdown">
+          <a aria-expanded="false" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" href="#"
+             id="dropdownMenuLink" role="button">
+            {{authService.usuario.username}}
+          </a>
+          <ul aria-labelledby="dropdownMenuLink" class="dropdown-menu">
+            <button (click)="logout()" class="dropdown-item" type="submit">Sign Out</button>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,77 @@
+<div class="card bg-dar text-white">
+  <div class="card-header text-black ">{{ titulo }}</div>
+  <div class="card-body">
+
+    <!--cuando se envie el formulario invocara el create(), guardara los valores cliente." ",-->
+    <form #clienteForm="ngForm">
+      <div class="form-group row">
+        <label class="col-form-label coll-sm-2 text-black" for="nombre">Nombre</label>
+        <div class="col-sm-6">
+          <input #nombre="ngModel" [(ngModel)]="cliente.nombre" class="form-control" id="nombre" minlength="4" name="nombre"
+                 required type="text">
+          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+            <div *ngIf="nombre.errors.required">
+              Nombre es requerido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-form-label coll-sm-2 text-black" for="apellido">Apellido</label>
+        <div class="col-sm-6">
+          <input #apellido="ngModel" [(ngModel)]="cliente.apellido" class="form-control" id="apellido" minlength="4" name="apellido"
+                 required type="text">
+          <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
+            <div *ngIf="apellido.errors.required">
+              Apellido es requerido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-form-label coll-sm-2 text-black" for="email">Email</label>
+        <div class="col-sm-6">
+          <input #email="ngModel" [(ngModel)]="cliente.email" class="form-control" email id="email" name="email" required
+                 type="text">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+              Email es requerido
+            </div>
+          </div>
+        </div>
+
+        // CAMPO FECHA
+        <div class="form-group row">
+          <label class="col-form-label coll-sm-2 text-black" for="create_at">Fecha</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="cliente.createAt" class="form-control" id="create_at" name="create_at" type="date">
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 ">
+          <label class="col-form-label coll-sm-2 text-black" for="region">Pais</label>
+          <div class="col-sm-6">
+            <select [(ngModel)]="cliente.region" [compareWith]="compararRegion" class="form-control" id="region"
+                    name="region" style="width: 300px" type="date">
+              <option [ngValue]="undefined">Seleccionar una region</option>
+              <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <button (click)='create()' *ngIf="!cliente.id" [disabled]="!clienteForm.form.valid" class="btn btn-primary"
+                    role="button">Crear cliente
+            </button>
+            <button (click)='update()' *ngIf="cliente.id" [disabled]="!clienteForm.form.valid" class="btn btn-primary"
+                    role="button">Editar información
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
